@@ -1,0 +1,54 @@
+.green-header {
+    background-color: #0bae02;
+    list-style-type: none;
+    margin: 0;
+    padding: 5px 0 5px 0;
+    overflow: hidden;
+    color: white;
+    box-shadow: 4px 4px grey;
+    width: 100%;
+}
+.top-search {
+    padding: 0 0 0 30px;
+}
+.station-text {
+    padding-top: 30px;
+    font-weight: bold;
+}
+.search-field {
+    width: 300px;
+    //height: 20px;
+}
+.listItem {
+    display: flex;
+    height: 25px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    
+}
+.list-header {
+    color: gray;
+}
+.listChild {
+    flex-grow: 1;
+    width: 25%;
+    
+}
+.overlined {
+    font-size: 10px;
+    color: black;
+    padding-top: 0px;
+    margin-top: 0px;
+}
+.late {
+    color: red;
+    padding-bottom: 0px;
+    padding-top: 0px;
+    margin-top: 0px;
+}
+.canceled {
+    color: lightgray;
+}
+.canceled-text{
+    color:red;
+}
