@@ -5,15 +5,15 @@ import { TrainInfo } from '../models/trainInfo.model';
 import { FormControl } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { startWith, map } from 'rxjs/operators';
-import { timingSafeEqual } from 'crypto';
+import { ParseError } from '@angular/compiler';
 
 
 @Component({
-  selector: 'app-tab-view',
-  templateUrl: './tab-view.component.html',
-  styleUrls: ['./tab-view.component.scss']
+  selector: 'app-stations-search',
+  templateUrl: './stations-search.component.html',
+  styleUrls: ['./stations-search.component.scss']
 })
-export class TabViewComponent implements OnInit {
+export class StationsSearchComponent implements OnInit {
 
   public stations: Station[] = [];
   public departureTrains: TrainInfo[] = [];
@@ -21,6 +21,7 @@ export class TabViewComponent implements OnInit {
   public value: string;
   public errorFlag: Boolean;
   public myControl = new FormControl();
+
 
   constructor(
     private trainservice: TrainservicesService
@@ -32,7 +33,6 @@ export class TabViewComponent implements OnInit {
   ngOnInit() {
     this.trainservice.getStations().subscribe(result => {
       this.stations = result;
-      console.log(this.stations);
       this.filteredStations = this.myControl.valueChanges
         .pipe(
           startWith<string | Station>(''),
@@ -41,14 +41,14 @@ export class TabViewComponent implements OnInit {
 
         );
     });
-    
+
     this.myControl.valueChanges.subscribe(value => {
-     // this.getStationCode();
-      const asd = this.getDepartureTrainsFromRest();
+      // this.getStationCode();
+      this.getDepartureTrainsFromRest();
       this.getArrivingTrainsFromRest();
     })
 
-    
+
 
     // this.myControl.registerOnChange(this.getStationCode());
   }
@@ -61,47 +61,31 @@ export class TabViewComponent implements OnInit {
 
     return this.stations.filter(station => station.name.toLowerCase().indexOf(filterValue) === 0);
   }
-  
-   
+
+
   getDepartureTrainsFromRest() {
     let stationSearch = this.myControl.value;
     this.trainservice.getDepartureTrains(stationSearch.code).subscribe(result => {
-      this.departureTrains  = result
-      this.departureTrains[0].startStation="dfasdfsdf";
-      console.log(this.departureTrains);
+      result.forEach(a => {
+        a.startStation = this.capitalize(this.stations.find(s => s.code === a.startStation).name);
+        a.destinationStation = this.capitalize(this.stations.find(s => s.code === a.destinationStation).name);
+      })
+      this.departureTrains = result;
+
     });
-  }
-  getStationName(a) {
-    const sta = this.stations.find(s => s.code === a.startStation)
-    const staString: string = sta.name
-    return staString;
   }
 
   getArrivingTrainsFromRest() {
     let stationSearch = this.myControl.value;
     this.trainservice.getArrivingTrains(stationSearch.code).subscribe(result => {
+      result.forEach(a => {
+        a.startStation = this.capitalize(this.stations.find(s => s.code === a.startStation).name);
+        a.destinationStation = this.capitalize(this.stations.find(s => s.code === a.destinationStation).name);
+      })
       this.arrivingTrains = result;
-      console.log(this.arrivingTrains);
     });
   }
-/*
-  getStationCode() {
-      //this.myControl.setValue(val);
-      
-    let stationSearch = this.myControl.value;
-    console.log(stationSearch);
-    console.log(this.value);
-    stationSearch = this.stations.find(s => s.name === this.value);
-    if (stationSearch) {
-      this.errorFlag = false;
-      console.log(stationSearch.code);
-
-      return stationSearch.code;
-    } else {
-      this.errorFlag = true;
-    }
-
-    
+  capitalize(string) {
+    return string.charAt(0).toUpperCase() + string.slice(1);
   }
-*/
 }

@@ -4,17 +4,17 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatButtonModule, MatCheckboxModule, MatInputModule, MatTabsModule, MatAutocompleteModule, MatListModule} from '@angular/material';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { TabViewComponent } from './tab-view/tab-view.component';
 import { Station } from './models/station.model';
 import { HttpClientModule } from '@angular/common/http';
 import { TrainservicesService } from './trainservices.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AsyncPipe, CommonModule } from '@angular/common';
+import { StationsSearchComponent } from './StationsSearch/stations-search.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    TabViewComponent
+    StationsSearchComponent
   ],
   imports: [
     BrowserModule,
