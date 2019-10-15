@@ -14,7 +14,9 @@ import { TrainInfo } from './models/trainInfo.model';
 export class TrainservicesService {
   // tslint:disable-next-line:max-line-length
   private baseUrl = 'https://rata.digitraffic.fi/api/v1/live-trains/station/'
+  // tslint:disable-next-line:max-line-length
   private trainsDepartureUrl2 = '?arrived_trains=0&arriving_trains=0&departed_trains=1&departing_trains=5&minutes_before_departure=300&minutes_after_departure=2&minutes_before_arrival=0&minutes_after_arrival=0&include_nonstopping=false';
+  // tslint:disable-next-line:max-line-length
   private trainsArrivalUrl2 = '?arrived_trains=5&arriving_trains=5&departed_trains=0&departing_trains=0&minutes_before_departure=0&minutes_after_departure=0&minutes_before_arrival=300&minutes_after_arrival=2&include_nonstopping=false';
   constructor(
     private http: HttpClient
@@ -58,7 +60,7 @@ export class TrainservicesService {
   public makeDatePretty(formattedDate: Date) {
     const hours = (formattedDate.getHours() < 10) ? '0' + formattedDate.getHours() : formattedDate.getHours();
     const minutes = (formattedDate.getMinutes() < 10) ? '0' + formattedDate.getMinutes() : formattedDate.getMinutes();
-    return hours + ':' + minutes
+    return hours + ':' + minutes;
   }
 
   public adaptTrainArrival(dto: any, code: string) {

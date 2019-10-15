@@ -1,6 +1,26 @@
 /* You can add global styles to this file, and also import other style files */
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
+@import '~@angular/material/theming';
+
+// Define a custom typography config that overrides the font-family as well as the
+// `headlines` and `body-1` levels.
+
+@font-face {
+  font-family: 'Dax-Medium';
+  font-style: normal;
+  font-weight: normal;
+  src: local('Dax-Medium'), url('./assets/dax-medium-5872e00270bc1.woff') format('woff');
+}
+
+$custom-typography: mat-typography-config(
+  $font-family: 'Dax-Medium',
+  $headline: mat-typography-level(32px, 48px, 700),
+  $body-1: mat-typography-level(16px, 24px, 500)
+);
+@include angular-material-typography($custom-typography);
+
+
 body {
-    font-family: "daxotbold",helvetica,Arial,sans-serif;
+    font-family: "Dax-Medium";
     color:#666666;
   }

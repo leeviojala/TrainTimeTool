@@ -1,12 +1,16 @@
-<div class="green-header">
-  <p style="padding-left: 20px;">Aseman junatiedot</p>
-</div>
+<mat-toolbar class="green-header">
+  <mat-toolbar-row>
+    <span style="padding-left: 20px;">Aseman junatiedot</span>
+  </mat-toolbar-row>
+
+</mat-toolbar>
 <div class="top-search">
   <div class="station-text">Hae aseman nimellä</div>
   <form class="search-form">
     <mat-form-field class="input-style" appearance="outline">
       <input type="text" matInput [formControl]="myControl" [matAutocomplete]="auto">
-      <button mat-button *ngIf="myControl.value" matSuffix mat-icon-button aria-label="Clear" (click)="myControl.setValue('');">
+      <button mat-button *ngIf="myControl.value" matSuffix mat-icon-button aria-label="Clear"
+        (click)="myControl.setValue('');">
         <i style="margin-bottom: 10px;" class="material-icons">
           clear
         </i>
@@ -20,79 +24,86 @@
   </form>
 </div>
 <mat-tab-group>
-  <mat-tab label="Tulevat">
+  <mat-tab label="Saapuvat">
     <ng-template matTabContent>
-      <mat-list matSort matSortActive="scheduledTime">
-        <mat-list-item>
-          <h3 mat-line>
-            <div class="listItem list-header">
-              <div class="listChild">Junanumero</div>
-              <div class="listChild">Lähtöasema</div>
-              <div class="listChild">Määränpää</div>
-              <div class="listChild">Saapumisaika</div>
-            </div>
-          </h3>
-        </mat-list-item>
-        <mat-list-item  *ngIf="!arrivingTrains.length > 0">
+      <div matSort matSortActive="scheduledTime">
+        <div>
+          <h3 mat-line></h3>
+        </div>
+        <div *ngIf="!arrivingTrains.length > 0">
           <div class="listItem">Junia ei löytynyt.</div>
-        </mat-list-item>
-        <mat-list-item *ngFor="let train of arrivingTrains;">
-          <h4 mat-line>
+        </div>
+        <mat-card *ngFor="let train of arrivingTrains;">
+          <div mat-line>
             <div class="listItem" *ngIf="!train">Junia ei löytynyt.</div>
             <div class="listItem">
-              <div class="listChild">{{train.trainNumber}}</div>
-              <div class="listChild">{{train.startStation}}</div>
-              <div class="listChild">{{train.destinationStation}}</div>
-              <div class="listChild" *ngIf="!train.timeLate && !train.canceled">{{train.scheduledTime}}</div>
-              <div class="listChild late" *ngIf="train.timeLate && !train.canceled">{{train.newTime}}
-                <p class="overlined">({{train.scheduledTime}})</p>
+              <div class="listChild">
+                <div class=" list-header">Junanumero</div>
+                <div>{{train.trainNumber}}</div>
               </div>
-              <div class="listChild canceled" *ngIf="train.canceled">{{train.scheduledTime}}
-                <p class="canceled-text">Cancelled</p>
+              <div class="listChild">
+                <div class=" list-header">Lähtöasema</div>
+                <div>{{train.startStation}}</div>
               </div>
-              <mat-divider></mat-divider>
+              <div class="listChild">
+                <div class="list-header">Määränpää</div>
+                <div>{{train.destinationStation}}</div>
+              </div>
+              <div class="listChild">
+                <div class=" list-header">Saapumisaika</div>
+                <div *ngIf="!train.timeLate && !train.canceled">{{train.scheduledTime}}</div>
+                <div class=" late" *ngIf="train.timeLate && !train.canceled">{{train.newTime}}
+                  <p class="overlined">({{train.scheduledTime}})</p>
+                </div>
+                <div class=" canceled" *ngIf="train.canceled">{{train.scheduledTime}}
+                  <p class="canceled-text">Cancelled</p>
+                </div>
+              </div>
             </div>
-          </h4>
-        </mat-list-item>
-      </mat-list>
-
+          </div>
+        </mat-card>
+      </div>
     </ng-template>
   </mat-tab>
   <mat-tab label="Lähtevät">
     <ng-template matTabContent>
-      <mat-list>
-        <mat-list-item>
-          <h3 mat-line>
-            <div class="listItem list-header">
-              <div class="listChild">Junanumero</div>
-              <div class="listChild">Lähtöasema</div>
-              <div class="listChild">Määränpää</div>
-              <div class="listChild">Lähtöaika</div>
-            </div>
-          </h3>
-        </mat-list-item>
-        <mat-list-item *ngIf="!departureTrains.length > 0">
-          <div class="listItem" >Junia ei löytynyt.</div>
-        </mat-list-item>
-        <mat-list-item *ngFor="let train of departureTrains;">
-          <h4 mat-line>
+      <div>
+        <div>
+          <h3 mat-line></h3>
+        </div>
+        <div *ngIf="!departureTrains.length > 0">
+          <div class="listItem">Junia ei löytynyt.</div>
+        </div>
+        <mat-card *ngFor="let train of departureTrains;">
+          <div mat-line>
+            <div class="listItem" *ngIf="!train">Junia ei löytynyt.</div>
             <div class="listItem">
-              <div class="listChild">{{train.trainNumber}}</div>
-              <div class="listChild">{{train.startStation}}</div>
-              <div class="listChild">{{train.destinationStation}}</div>
-              <div class="listChild" *ngIf="!train.timeLate && !train.canceled">{{train.scheduledTime}}</div>
-              <div class="listChild late" *ngIf="train.timeLate && !train.canceled">{{train.newTime}}
-                <p class="overlined">({{train.scheduledTime}})</p>
+              <div class="listChild">
+                <div class=" list-header">Junanumero</div>
+                <div>{{train.trainNumber}}</div>
               </div>
-              <div class="listChild canceled" *ngIf="train.canceled">{{train.scheduledTime}}
-                <p class="canceled-text">Cancelled</p>
+              <div class="listChild">
+                <div class=" list-header">Lähtöasema</div>
+                <div>{{train.startStation}}</div>
               </div>
-              <mat-divider></mat-divider>
+              <div class="listChild">
+                <div class="list-header">Määränpää</div>
+                <div>{{train.destinationStation}}</div>
+              </div>
+              <div class="listChild">
+                <div class=" list-header">Lähtöaika</div>
+                <div *ngIf="!train.timeLate && !train.canceled">{{train.scheduledTime}}</div>
+                <div class=" late" *ngIf="train.timeLate && !train.canceled">{{train.newTime}}
+                  <p class="overlined">({{train.scheduledTime}})</p>
+                </div>
+                <div class=" canceled" *ngIf="train.canceled">{{train.scheduledTime}}
+                  <p class="canceled-text">Cancelled</p>
+                </div>
+              </div>
             </div>
-          </h4>
-        </mat-list-item>
-      </mat-list>
-
+          </div>
+        </mat-card>
+      </div>
     </ng-template>
   </mat-tab>
 </mat-tab-group>

@@ -1,7 +1,8 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {MatButtonModule, MatCheckboxModule, MatInputModule, MatTabsModule, MatAutocompleteModule, MatListModule} from '@angular/material';
+import {MatButtonModule, MatCheckboxModule,
+   MatInputModule, MatTabsModule, MatAutocompleteModule, MatListModule, MatGridListModule, MatCardModule, MatToolbarModule} from '@angular/material';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { Station } from './models/station.model';
@@ -30,7 +31,10 @@ import { StationsSearchComponent } from './StationsSearch/stations-search.compon
           MatInputModule, ReactiveFormsModule,
            MatAutocompleteModule,
             CommonModule,
-            MatListModule
+            MatListModule,
+            MatGridListModule,
+            MatCardModule,
+            MatToolbarModule
   ],
   providers: [TrainservicesService],
   bootstrap: [AppComponent]

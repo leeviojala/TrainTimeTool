@@ -46,7 +46,7 @@ export class StationsSearchComponent implements OnInit {
       // this.getStationCode();
       this.getDepartureTrainsFromRest();
       this.getArrivingTrainsFromRest();
-    })
+    });
 
 
 
@@ -64,24 +64,24 @@ export class StationsSearchComponent implements OnInit {
 
 
   getDepartureTrainsFromRest() {
-    let stationSearch = this.myControl.value;
+    const stationSearch = this.myControl.value;
     this.trainservice.getDepartureTrains(stationSearch.code).subscribe(result => {
       result.forEach(a => {
         a.startStation = this.capitalize(this.stations.find(s => s.code === a.startStation).name);
         a.destinationStation = this.capitalize(this.stations.find(s => s.code === a.destinationStation).name);
-      })
+      });
       this.departureTrains = result;
 
     });
   }
 
   getArrivingTrainsFromRest() {
-    let stationSearch = this.myControl.value;
+    const stationSearch = this.myControl.value;
     this.trainservice.getArrivingTrains(stationSearch.code).subscribe(result => {
       result.forEach(a => {
         a.startStation = this.capitalize(this.stations.find(s => s.code === a.startStation).name);
         a.destinationStation = this.capitalize(this.stations.find(s => s.code === a.destinationStation).name);
-      })
+      });
       this.arrivingTrains = result;
     });
   }
